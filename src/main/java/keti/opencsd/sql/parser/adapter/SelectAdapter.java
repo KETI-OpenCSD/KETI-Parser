@@ -1,16 +1,14 @@
 package keti.opencsd.sql.parser.adapter;
 
 import keti.opencsd.config.JsonKey;
-import keti.opencsd.core.Parser;
-import keti.opencsd.core.json.JsonManager;
 import net.sf.jsqlparser.expression.Alias;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.statement.select.*;
 
 import java.util.List;
 
-public class SelectAdapter extends JsonManager {
-    private final SelectVisitorAdapter selectVisitorAdapter;
+public class SelectAdapter{
+    /*private final SelectVisitorAdapter selectVisitorAdapter;
     private FromAdapter fromAdapter;
     private GroupByAdapter groupByAdapter;
     private OrderByAdapter orderByAdapter;
@@ -19,10 +17,7 @@ public class SelectAdapter extends JsonManager {
     public SelectAdapter() {
 
         selectVisitorAdapter = new SelectVisitorAdapter() {
-            /**
-             * most select query is processed as plain select
-             * @param plainSelect visitor event listened
-             */
+
             @Override
             public void visit(PlainSelect plainSelect) {
                 // distinct
@@ -88,10 +83,6 @@ public class SelectAdapter extends JsonManager {
                 }
             }
 
-            /**
-             * select including union(and etc...)
-             * @param setOperationList visitor event listened
-             */
             @Override
             public void visit(SetOperationList setOperationList) {
                 // union
@@ -115,5 +106,5 @@ public class SelectAdapter extends JsonManager {
 
     public SelectVisitorAdapter getSelectVisitorAdapter() {
         return selectVisitorAdapter;
-    }
+    }*/
 }

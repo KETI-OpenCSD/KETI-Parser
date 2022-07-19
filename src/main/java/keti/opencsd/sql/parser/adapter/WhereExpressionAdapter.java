@@ -1,12 +1,10 @@
 package keti.opencsd.sql.parser.adapter;
 
 import keti.opencsd.config.JsonKey;
-import keti.opencsd.core.Parser;
-import keti.opencsd.core.json.JsonManager;
 import net.sf.jsqlparser.expression.ExpressionVisitorAdapter;
 import net.sf.jsqlparser.statement.select.SubSelect;
 
-public class WhereExpressionAdapter extends JsonManager {
+public class WhereExpressionAdapter{
     private final ExpressionVisitorAdapter whereExpressionVisitor;
     public WhereExpressionAdapter(){
         whereExpressionVisitor = new ExpressionVisitorAdapter() {
@@ -16,8 +14,7 @@ public class WhereExpressionAdapter extends JsonManager {
              */
             @Override
             public void visit(SubSelect subSelect) {
-                putToJson(JsonKey.WHERE_SUB_QUERY, 1, subSelect.toString());
-                putToJson(JsonKey.WHERE_SUB_QUERY_ANALYSE, 1, new Parser().parse(subSelect.toString()));
+
                 super.visit(subSelect);
             }
 

@@ -1,14 +1,12 @@
 package keti.opencsd.sql.parser.adapter;
 
 import keti.opencsd.config.JsonKey;
-import keti.opencsd.core.Parser;
-import keti.opencsd.core.json.JsonManager;
 import net.sf.jsqlparser.statement.select.FromItemVisitorAdapter;
 import net.sf.jsqlparser.statement.select.SubSelect;
 
-public class FromAdapter extends JsonManager {
+public class FromAdapter {
 
-    private final FromItemVisitorAdapter fromItemVisitor
+    private final FromItemVisitorAdapter fromItemVisitor;
     public FromAdapter(){
         fromItemVisitor = new FromItemVisitorAdapter() {
             /**
@@ -17,8 +15,6 @@ public class FromAdapter extends JsonManager {
              */
             @Override
             public void visit(SubSelect subSelect) {
-                putToJson(JsonKey.FROM_SUB_QUERY, 1, subSelect.toString());
-                putToJson(JsonKey.FROM_SUB_QUERY_ANALYSE, 1, new Parser().parse(subSelect.toString()));
                 super.visit(subSelect);
             }
 
