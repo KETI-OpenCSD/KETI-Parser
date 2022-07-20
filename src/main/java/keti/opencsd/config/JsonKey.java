@@ -17,5 +17,6 @@ public class JsonKey {
     public static final String COLUMNPROJECTION = "column_projection";
     public static final String GROUPBY = "groupBy";
     public static final String ORDERBY = "orderBy";
+    public static final String HAVING = "having";
     public static final String DISTINCT = "distinct";
 }

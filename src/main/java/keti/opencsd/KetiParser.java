@@ -1,10 +1,9 @@
 package keti.opencsd;
 
-import keti.opencsd.sql.parser.Parser;
+import keti.opencsd.config.Config;
 import keti.opencsd.table.TableManager;
-import keti.opencsd.utils.SQLTypes;
+import keti.opencsd.utils.converter.Infix2Postfix;
 import net.sf.jsqlparser.parser.ParseException;
-import net.sf.jsqlparser.statement.Statement;
 
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +55,14 @@ public class KetiParser {
         System.out.println(dbInfo.size());
         System.out.println(dbInfo.get("tpch"));
         System.out.println(dbInfo.get("tpch").get("lineitem").colInfo);
+        String pf = Infix2Postfix.Build()
+                .setExpression("L_EXTENDEDPRICE*(1-L_DISCOUNT)*(1+L_TAX)")
+                .Convert2String();
+        print(pf.toString());
+        Config.getValue(Config.AggregationFunc.SUM);
+    }
 
+    public static void print(Object Target){
+        System.out.println(Target.toString());
     }
 }

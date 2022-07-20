@@ -9,7 +9,7 @@ public class IDGenerator {
         this.WorkID = 0;
     }
 
-    public String MakeSnippetUUID(int QID, int WID){
+    public static String MakeSnippetUUID(int QID, int WID){
         String snippet = "Snippet";
         return snippet +QID+WID;
     }
