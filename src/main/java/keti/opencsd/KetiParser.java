@@ -56,10 +56,6 @@ public class KetiParser {
         System.out.println(dbInfo.size());
         System.out.println(dbInfo.get("tpch"));
         System.out.println(dbInfo.get("tpch").get("lineitem").colInfo);
-        Object test = 1;
-        System.out.println(test);
-        test = "abc";
-        System.out.println(test);
 
     }
 }
