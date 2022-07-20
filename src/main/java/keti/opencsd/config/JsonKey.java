@@ -1,26 +1,21 @@
 package keti.opencsd.config;
 
 public class JsonKey {
-    public static final String CRUD = "CRUD";
-    public static final String INSERT = "INSERT";
-    public static final String SELECT = "SELECT";
-    public static final String UPDATE = "UPDATE";
-    public static final String DELETE = "DELETE";
-    public static final String DISTINCT = "DISTINCT";
-    public static final String COLUMN = "COLUMN";
-    public static final String FROM = "TABLE";
-    public static final String FROM_ALIAS = "TABLE ALIAS";
-    public static final String FROM_SUB_QUERY = "TABLE SUB QUERY ";
-    public static final String FROM_SUB_QUERY_ANALYSE = "TABLE SUB QUERY ANALYSE ";
-    public static final String WHERE = "WHERE";
-    public static final String WHERE_SUB_QUERY = "WHERE SUB QUERY ";
-    public static final String WHERE_SUB_QUERY_ANALYSE = "WHERE SUB QUERY ANALYSE ";
-    public static final String VALUE = "VALUE";
-    public static final String GROUP_BY = "GROUP_BY";
-    public static final String ORDER_BY = "ORDER_BY";
-    public static final String JOIN = "JOIN ";
-    public static final String JOIN_ALIAS = "JOIN ALIAS ";
-    public static final String UNION = "UNION ";
-    public static final String UNION_ALL = "UNION ALL ";
-    public static final String UNION_ANALYSE = "UNION ANALYSE ";
+    public static final String QUERYID = "queryID";
+    public static final String WORKID = "workID";
+    public static final String TABLENAME = "table_name";
+    public static final String TABLECOL = "table_col";
+    public static final String TABLEFILTER = "table_filter";
+    public static final String TABLEOFFSET = "table_offset";
+    public static final String TABLEOFFLEN = "table_offlen";
+    public static final String TABLEDATATYPE = "table_datatype";
+    public static final String BLOCKLIST = "blockList";
+    public static final String TABLEALIAS = "table_alias";
+    public static final String ALIAS = "alias";
+    public static final String EXPR = "expr";
+    public static final String COLUMNFILTERING = "column_filtering";
+    public static final String COLUMNPROJECTION = "column_projection";
+    public static final String GROUPBY = "groupBy";
+    public static final String ORDERBY = "orderBy";
+    public static final String DISTINCT = "distinct";
 }

@@ -6,6 +6,7 @@ import keti.opencsd.utils.SQLTypes;
 import net.sf.jsqlparser.parser.ParseException;
 import net.sf.jsqlparser.statement.Statement;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -31,9 +32,9 @@ public class KetiParser {
     public static void main(String[] args) throws ParseException {
         TableManager tableManager = new TableManager();
 
-        List<TableManager.Table> tableList = tableManager.getTableList();
-        System.out.println(tableList.size());
-        tableManager.AppendTable(tableManager.TableBuilder("lineitem")
+        HashMap<String, HashMap<String, TableManager.Table>> dbInfo = tableManager.getDBInfo();
+        System.out.println(dbInfo);
+        tableManager.AppendTable("tpch","lineitem",tableManager.TableBuilder()
                 .addSchema("l_orderkey","int")
                 .addSchema("l_partkey", "int")
                 .addSchema("l_suppkey", "int")
@@ -51,51 +52,14 @@ public class KetiParser {
                 .addSchema("l_shipmode", "char",10)
                 .addSchema("l_commentvar", "varchar",44)
                 .build());
-        tableList = tableManager.getTableList();
-        System.out.println(tableList.size());
-        tableManager.AppendTable(tableManager.TableBuilder("lineitem")
-                .addSchema("l_orderkey","int")
-                .addSchema("l_partkey", "int")
-                .addSchema("l_suppkey", "int")
-                .addSchema("l_linenumber", "int")
-                .addSchema("l_quantity", "decimal",15,2)
-                .addSchema("l_extendedprice", "decimal",15,2)
-                .addSchema("l_discount", "decimal",15,2)
-                .addSchema("l_tax", "decimal",15,2)
-                .addSchema("l_returnflag", "char",1)
-                .addSchema("l_linestatus", "char",1)
-                .addSchema("l_shipDATE", "date")
-                .addSchema("l_commitDATE", "date")
-                .addSchema("l_receiptDATE", "date")
-                .addSchema("l_shipinstruct", "char",25)
-                .addSchema("l_shipmode", "char",10)
-                .addSchema("l_commentvar", "varchar",44)
-                .build());
-        tableList = tableManager.getTableList();
-        System.out.println(tableList.size());
-        tableManager.AppendTable(tableManager.TableBuilder("lineitem")
-                .addSchema("l_orderkey","int")
-                .addSchema("l_partkey", "int")
-                .addSchema("l_suppkey", "int")
-                .addSchema("l_linenumber", "int")
-                .addSchema("l_quantity", "decimal",15,2)
-                .addSchema("l_extendedprice", "decimal",15,2)
-                .addSchema("l_discount", "decimal",15,2)
-                .addSchema("l_tax", "decimal",15,2)
-                .addSchema("l_returnflag", "char",1)
-                .addSchema("l_linestatus", "char",1)
-                .addSchema("l_shipDATE", "date")
-                .addSchema("l_commitDATE", "date")
-                .addSchema("l_receiptDATE", "date")
-                .addSchema("l_shipinstruct", "char",25)
-                .addSchema("l_shipmode", "char",10)
-                .addSchema("l_commentvar", "varchar",44)
-                .build());
-        tableList = tableManager.getTableList();
-        System.out.println(tableList.size());
-        System.out.println(tableList.get(0).tableName);
-        System.out.println(tableList.get(0).colInfo);
-
+        dbInfo = tableManager.getDBInfo();
+        System.out.println(dbInfo.size());
+        System.out.println(dbInfo.get("tpch"));
+        System.out.println(dbInfo.get("tpch").get("lineitem").colInfo);
+        Object test = 1;
+        System.out.println(test);
+        test = "abc";
+        System.out.println(test);
 
     }
 }

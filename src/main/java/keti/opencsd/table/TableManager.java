@@ -1,5 +1,6 @@
 package keti.opencsd.table;
 
+import keti.opencsd.utils.SQLTypeString;
 import keti.opencsd.utils.SQLTypes;
 
 import java.util.ArrayList;
@@ -7,127 +8,99 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-
-/*
-case SQLTypes.TINYINT.toString():
-case SQLTypes.SMALLINT.toString():
-case SQLTypes.MEDIUMINT.toString():
-case SQLTypes.INT.toString():
-case SQLTypes.BINARY.toString():
-case SQLTypes.BIT.toString():
-case SQLTypes.BOOL.toString():
-case SQLTypes.BOOLEAN.toString():
-case SQLTypes.INTEGER.toString():
-case SQLTypes.BIGINT.toString():
-case SQLTypes.FLOAT.toString():
-case SQLTypes.DOUBLE.toString():
-case SQLTypes.DECIMAL.toString():
-case SQLTypes.CHAR.toString():
-case SQLTypes.VARCHAR.toString():
-case SQLTypes.TINYBLOB.toString():
-case SQLTypes.TINYTEXT.toString():
-case SQLTypes.BLOB.toString():
-case SQLTypes.TEXT.toString():
-case SQLTypes.MEDIUMBLOB.toString():
-case SQLTypes.MEDIUMTEXT.toString():
-case SQLTypes.LONGBLOB.toString():
-case SQLTypes.LONGTEXT.toString():
-case SQLTypes.ENUM.toString():
-case SQLTypes.DATE.toString():
-case SQLTypes.DATETIME.toString():
-case SQLTypes.TIMESTAMP.toString():
-case SQLTypes.TIME.toString():
-case SQLTypes.YEAR.toString():
- */
 public class TableManager {
-    private List<Table> tableList;
+    private HashMap<String, HashMap<String, Table>> DBInfo;
+    private HashMap<String, Table> TableList;
     public TableManager() {
-        this.tableList = new ArrayList<>();
+        this.DBInfo = new HashMap<>();
+        this.TableList = new HashMap<>();
     }
-    public TableManager(List<Table> tableList) {
-        this.tableList = tableList;
+    public Table TableBuilder(){
+        return new Table();
+    }
+    public void AppendTable(String tableName, Table table){
+        this.TableList.put(tableName, table);
+    }
+    public void AppendTable(String DBName, String tableName, Table table){
+        this.TableList.put(tableName, table);
+        this.DBInfo.put(DBName, this.TableList);
     }
 
-    public Table TableBuilder(String tableName){
-        return new Table(tableName);
-    }
-    public void AppendTable(Table table){
-        this.tableList.add(table);
+    public HashMap<String, HashMap<String, Table>> getDBInfo() {
+        return DBInfo;
     }
 
-    public List<Table> getTableList() {
-        return tableList;
+    public HashMap<String, Table> getTableList() {
+        return TableList;
     }
 
     public static class Table extends TableManager{
-        public final String tableName;
         public final HashMap<String,HashMap<String, Integer>> colInfo;
 
-        public Table(String tableName){
-            this.tableName = tableName;
+        public Table(){
             this.colInfo = new HashMap<>();
         }
         public Table addSchema(String colName, String colType){
             HashMap<String, Integer> integerHashMap = new HashMap<>();
             colType = colType.toUpperCase();
             switch (colType){
-                case "TINYINT":
+                case SQLTypeString.TINYINT:
                     integerHashMap.put(colType,SQLTypes.TINYINT.getByteLength());
-                case "SMALLINT":
+                case SQLTypeString.SMALLINT:
                     integerHashMap.put(colType,SQLTypes.SMALLINT.getByteLength());
-                case "MEDIUMINT":
+                case SQLTypeString.MEDIUMINT:
                     integerHashMap.put(colType,SQLTypes.MEDIUMINT.getByteLength());
-                case "INT":
+                case SQLTypeString.INT:
                     integerHashMap.put(colType,SQLTypes.INT.getByteLength());
-                case "BINARY":
+                case SQLTypeString.BINARY:
                     integerHashMap.put(colType,SQLTypes.BINARY.getByteLength());
-                case "BIT":
+                case SQLTypeString.BIT:
                     integerHashMap.put(colType,SQLTypes.BIT.getByteLength());
-                case "BOOL":
+                case SQLTypeString.BOOL:
                     integerHashMap.put(colType,SQLTypes.BOOL.getByteLength());
-                case "BOOLEAN":
+                case SQLTypeString.BOOLEAN:
                     integerHashMap.put(colType,SQLTypes.BOOLEAN.getByteLength());
-                case "INTEGER":
+                case SQLTypeString.INTEGER:
                     integerHashMap.put(colType,SQLTypes.INTEGER.getByteLength());
-                case "BIGINT":
+                case SQLTypeString.BIGINT:
                     integerHashMap.put(colType,SQLTypes.BIGINT.getByteLength());
-                case "FLOAT":
+                case SQLTypeString.FLOAT:
                     integerHashMap.put(colType,SQLTypes.FLOAT.getByteLength());
-                case "DOUBLE":
+                case SQLTypeString.DOUBLE:
                     integerHashMap.put(colType,SQLTypes.DOUBLE.getByteLength());
-                case "DECIMAL":
+                case SQLTypeString.DECIMAL:
                     integerHashMap.put(colType,SQLTypes.DECIMAL.getByteLength(10,0));
-                case "CHAR":
+                case SQLTypeString.CHAR:
                     integerHashMap.put(colType,SQLTypes.CHAR.getByteLength(1));
-                case "VARCHAR":
+                case SQLTypeString.VARCHAR:
                     integerHashMap.put(colType,SQLTypes.VARCHAR.getByteLength(1));
-                case "TINYBLOB":
+                case SQLTypeString.TINYBLOB:
                     integerHashMap.put(colType,SQLTypes.TINYBLOB.getByteLength(1));
-                case "TINYTEXT":
+                case SQLTypeString.TINYTEXT:
                     integerHashMap.put(colType,SQLTypes.TINYTEXT.getByteLength(1));
-                case "BLOB":
+                case SQLTypeString.BLOB:
                     integerHashMap.put(colType,SQLTypes.BLOB.getByteLength(1));
-                case "TEXT":
+                case SQLTypeString.TEXT:
                     integerHashMap.put(colType,SQLTypes.TEXT.getByteLength(1));
-                case "MEDIUMBLOB":
+                case SQLTypeString.MEDIUMBLOB:
                     integerHashMap.put(colType,SQLTypes.MEDIUMBLOB.getByteLength(1));
-                case "MEDIUMTEXT":
+                case SQLTypeString.MEDIUMTEXT:
                     integerHashMap.put(colType,SQLTypes.MEDIUMTEXT.getByteLength(1));
-                case "LONGBLOB":
+                case SQLTypeString.LONGBLOB:
                     integerHashMap.put(colType,SQLTypes.LONGBLOB.getByteLength(1));
-                case "LONGTEXT":
+                case SQLTypeString.LONGTEXT:
                     integerHashMap.put(colType,SQLTypes.LONGTEXT.getByteLength(1));
-                case "ENUM":
+                case SQLTypeString.ENUM:
                     integerHashMap.put(colType,SQLTypes.ENUM.getByteLength(1));
-                case "DATE":
+                case SQLTypeString.DATE:
                     integerHashMap.put(colType,SQLTypes.DATE.getByteLength());
-                case "DATETIME":
+                case SQLTypeString.DATETIME:
                     integerHashMap.put(colType,SQLTypes.DATETIME.getByteLength());
-                case "TIMESTAMP":
+                case SQLTypeString.TIMESTAMP:
                     integerHashMap.put(colType,SQLTypes.TIMESTAMP.getByteLength());
-                case "TIME":
+                case SQLTypeString.TIME:
                     integerHashMap.put(colType,SQLTypes.TIME.getByteLength());
-                case "YEAR":
+                case SQLTypeString.YEAR:
                     integerHashMap.put(colType,SQLTypes.YEAR.getByteLength());
             }
             this.colInfo.put(colName,integerHashMap);
@@ -137,27 +110,27 @@ public class TableManager {
             HashMap<String, Integer> integerHashMap = new HashMap<>();
             colType = colType.toUpperCase();
             switch (colType){
-                case "CHAR":
+                case SQLTypeString.CHAR:
                     integerHashMap.put(colType,SQLTypes.CHAR.getByteLength(dataLength));
-                case "VARCHAR":
+                case SQLTypeString.VARCHAR:
                     integerHashMap.put(colType,SQLTypes.VARCHAR.getByteLength(dataLength));
-                case "TINYBLOB":
+                case SQLTypeString.TINYBLOB:
                     integerHashMap.put(colType,SQLTypes.TINYBLOB.getByteLength(dataLength));
-                case "TINYTEXT":
+                case SQLTypeString.TINYTEXT:
                     integerHashMap.put(colType,SQLTypes.TINYTEXT.getByteLength(dataLength));
-                case "BLOB":
+                case SQLTypeString.BLOB:
                     integerHashMap.put(colType,SQLTypes.BLOB.getByteLength(dataLength));
-                case "TEXT":
+                case SQLTypeString.TEXT:
                     integerHashMap.put(colType,SQLTypes.TEXT.getByteLength(dataLength));
-                case "MEDIUMBLOB":
+                case SQLTypeString.MEDIUMBLOB:
                     integerHashMap.put(colType,SQLTypes.MEDIUMBLOB.getByteLength(dataLength));
-                case "MEDIUMTEXT":
+                case SQLTypeString.MEDIUMTEXT:
                     integerHashMap.put(colType,SQLTypes.MEDIUMTEXT.getByteLength(dataLength));
-                case "LONGBLOB":
+                case SQLTypeString.LONGBLOB:
                     integerHashMap.put(colType,SQLTypes.LONGBLOB.getByteLength(dataLength));
-                case "LONGTEXT":
+                case SQLTypeString.LONGTEXT:
                     integerHashMap.put(colType,SQLTypes.LONGTEXT.getByteLength(dataLength));
-                case "ENUM":
+                case SQLTypeString.ENUM:
                     integerHashMap.put(colType,SQLTypes.ENUM.getByteLength(dataLength));
             }
             this.colInfo.put(colName,integerHashMap);
