@@ -3,6 +3,7 @@ package keti.opencsd;
 import keti.opencsd.config.Config;
 import keti.opencsd.table.TableManager;
 import keti.opencsd.utils.converter.Infix2Postfix;
+import keti.opencsd.utils.converter.Transposition;
 import net.sf.jsqlparser.parser.ParseException;
 
 import java.util.HashMap;
@@ -55,11 +56,19 @@ public class KetiParser {
         System.out.println(dbInfo.size());
         System.out.println(dbInfo.get("tpch"));
         System.out.println(dbInfo.get("tpch").get("lineitem").colInfo);
-        String pf = Infix2Postfix.Build()
+        List<Object> pf = new Infix2Postfix(Config.AggregationFunc.SUM).Build()
                 .setExpression("L_EXTENDEDPRICE*(1-L_DISCOUNT)*(1+L_TAX)")
-                .Convert2String();
-        print(pf.toString());
-        Config.getValue(Config.AggregationFunc.SUM);
+                .Convert2List();
+//        for (Object o : pf) {
+//            System.out.println("Type: " + o.getClass().getSimpleName() + " Value: " + o);
+//        }
+        Transposition tran = new Transposition("l_quantity + 100", ">", "l_discount - 24");
+        List<Object> t = tran.TranspositionStart();
+        print(t.toString());
+        for (Object o : t) {
+            System.out.println("Type: " + o.getClass().getSimpleName() + " Value: " + o);
+        }
+
     }
 
     public static void print(Object Target){

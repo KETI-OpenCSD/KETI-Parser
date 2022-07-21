@@ -14,13 +14,17 @@ public class Infix2Postfix {
     private static final char MULTIPLY = '*', DIVIDE = '/';
     private static final char POWER ='^';
     private String infix;
+    //private StringBuilder postfix;
+    private List<Object> postfixList;
     public Infix2Postfix(){
-
+        this.postfixList = new ArrayList<>();
     }
-    public Infix2Postfix(int aggregateFunc){
+    public Infix2Postfix(Config.AggregationFunc aggregateFunc){
+        this.postfixList = new ArrayList<>();
+        this.postfixList.add(aggregateFunc.getValue());
     }
-    public static Infix2Postfix Build(){
-        return new Infix2Postfix();
+    public Infix2Postfix Build(){
+        return this;
     }
     private boolean isOperator(char c) { // Tell whether c is an operator.
         return c == '+'  ||  c == '-'  ||  c == '*'  ||  c == '/'  ||  c == '^'
@@ -46,45 +50,44 @@ public class Infix2Postfix {
                 return false;
         }
     }
-    public String Convert2String() {
+//    public String Convert2String() {
+//        Stack operatorStack = new Stack();
+//        char c;
+//        StringTokenizer parser = new StringTokenizer(infix,"+-*/^() ",true);
+//        postfix = new StringBuilder(infix.length());
+//        while (parser.hasMoreTokens()) {
+//            String token = parser.nextToken();
+//            c = token.charAt(0);
+//            if ( (token.length() == 1) && isOperator(c) ) {
+//                while (!operatorStack.empty() &&
+//                        !lowerPrecedence(((String)operatorStack.peek()).charAt(0), c)) {
+//                    postfix.append(" ").append((String) operatorStack.pop());
+//                }
+//                if (c==')') {
+//                    String operator = (String)operatorStack.pop();
+//                    while (operator.charAt(0)!='(') {
+//                        postfix.append(" ").append(operator);
+//                        operator = (String)operatorStack.pop();
+//                    }
+//                }
+//                else
+//                    operatorStack.push(token);
+//            }
+//            else if ( (token.length() == 1) && isSpace(c) ) {
+//            }
+//            else {
+//                postfix.append(" ").append(token);
+//            }
+//        }
+//        while (!operatorStack.empty()) {
+//            postfix.append(" ").append((String) operatorStack.pop());
+//        }
+//        return postfix.toString();
+//    }
+    public List<Object> Convert2List() {
         Stack operatorStack = new Stack();
         char c;
         StringTokenizer parser = new StringTokenizer(infix,"+-*/^() ",true);
-        StringBuilder postfix = new StringBuilder(infix.length());
-        while (parser.hasMoreTokens()) {
-            String token = parser.nextToken();
-            c = token.charAt(0);
-            if ( (token.length() == 1) && isOperator(c) ) {
-                while (!operatorStack.empty() &&
-                        !lowerPrecedence(((String)operatorStack.peek()).charAt(0), c)) {
-                    postfix.append(" ").append((String) operatorStack.peek());
-                }
-                if (c==')') {
-                    String operator = (String)operatorStack.pop();
-                    while (operator.charAt(0)!='(') {
-                        postfix.append(" ").append(operator);
-                        operator = (String)operatorStack.pop();
-                    }
-                }
-                else
-                    operatorStack.push(token);
-            }
-            else if ( (token.length() == 1) && isSpace(c) ) {
-            }
-            else {
-                postfix.append(" ").append(token);
-            }
-        }
-        while (!operatorStack.empty()) {
-            postfix.append(" ").append((String) operatorStack.peek());
-        }
-        return postfix.toString();
-    }
-    public List<String> Convert2List() {
-        Stack operatorStack = new Stack();
-        char c;
-        StringTokenizer parser = new StringTokenizer(infix,"+-*/^() ",true);
-        List<String> postfixList = new ArrayList<>();
         while (parser.hasMoreTokens()) {
             String token = parser.nextToken();
             c = token.charAt(0);
@@ -106,13 +109,16 @@ public class Infix2Postfix {
             else if ( (token.length() == 1) && isSpace(c) ) {
             }
             else {
-                postfixList.add(token);
+                try {
+                    postfixList.add(Integer.parseInt(token));
+                }catch (NumberFormatException e){
+                    postfixList.add(token);
+                }
             }
         }
         while (!operatorStack.empty()) {
             postfixList.add((String) operatorStack.pop());
         }
-        KetiParser.print(postfixList);
         return postfixList;
     }
     public Infix2Postfix setExpression(String formula){
@@ -120,4 +126,5 @@ public class Infix2Postfix {
         this.infix = formula;
         return this;
     }
+
 }
