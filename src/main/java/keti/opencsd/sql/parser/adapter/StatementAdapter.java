@@ -1,6 +1,5 @@
 package keti.opencsd.sql.parser.adapter;
 
-import keti.opencsd.config.JsonKey;
 import net.sf.jsqlparser.statement.StatementVisitorAdapter;
 import net.sf.jsqlparser.statement.delete.Delete;
 import net.sf.jsqlparser.statement.insert.Insert;
@@ -9,9 +8,9 @@ import net.sf.jsqlparser.statement.update.Update;
 
 public class StatementAdapter{
     private final StatementVisitorAdapter statementVisitor;
-    private final SelectAdapter selectAdapter;
+    //private final SelectAdapter selectAdapter;
     public StatementAdapter() {
-        selectAdapter = new SelectAdapter();
+        //selectAdapter = new SelectAdapter();
         statementVisitor = new StatementVisitorAdapter() {
 
             @Override

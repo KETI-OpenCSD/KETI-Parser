@@ -1,6 +1,5 @@
 package keti.opencsd.sql.parser.adapter;
 
-import keti.opencsd.config.JsonKey;
 import net.sf.jsqlparser.expression.ExpressionVisitorAdapter;
 import net.sf.jsqlparser.statement.select.SubSelect;
 

@@ -59,9 +59,10 @@ public class KetiParser {
         List<Object> pf = new Infix2Postfix(Config.AggregationFunc.SUM).Build()
                 .setExpression("L_EXTENDEDPRICE*(1-L_DISCOUNT)*(1+L_TAX)")
                 .Convert2List();
-//        for (Object o : pf) {
-//            System.out.println("Type: " + o.getClass().getSimpleName() + " Value: " + o);
-//        }
+        print(pf);
+        for (Object o : pf) {
+            System.out.println("Type: " + o.getClass().getSimpleName() + " Value: " + o);
+        }
         Transposition tran = new Transposition("l_quantity + 100", ">", "l_discount - 24");
         List<Object> t = tran.TranspositionStart();
         print(t.toString());
