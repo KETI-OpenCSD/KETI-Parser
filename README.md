@@ -23,7 +23,7 @@ simulctl> SELECT l_returnflag,
     ->        Avg(l_extendedprice)                                      AS avg_price,
     ->        Avg(l_discount)                                           AS avg_disc,
     ->        Count(*)                                                  AS count_order
-    -> FROM   lineitem_100000
+    -> FROM   lineitem
     -> WHERE  l_shipdate <= DATE ('1998-12-01') - interval '108' day
     -> GROUP  BY l_returnflag,
     ->           l_linestatus
